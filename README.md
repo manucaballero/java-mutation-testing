@@ -1,10 +1,10 @@
 # Tests mutantes en Java
 
 
-Los tests mutantes  se encargan de modificar parte de la lógica del código sobre el que hemos hecho tests unitarios. A estos cambios se les conoce como mutaciones (ej: Tenemos una condición > y el mutante la cambia a <). 
+Los tests mutantes se encargan de modificar parte de la lógica del código sobre el que hemos hecho tests unitarios. A estos cambios se les conoce como mutaciones (ej: Tenemos una condición > y el mutante la cambia a <). 
 Esto nos sirve para verificar que nuestros tests tienen en cuenta todas las condiciones y posibles comportamientos de nuestro código. El haber cambiado una condición provocará que al volver a lanzar los tests, alguno de ellos fallará. A esto se le conoce como matar la mutación y es el comportamiento que debiera darse. 
 
-Si tenemos una mutación y todos los tests siguen pasando (la mutación sigue viva), lo que quiere decir que no se han creado tests que cubran esa condición o que los existentes están mal programados. 
+Si tenemos una mutación y todos los tests siguen pasando (la mutación sigue viva), quiere decir que no se han creado tests que cubran esa condición o que los existentes están mal programados. 
 
 En el entorno de Java tenemos un plugin llamado Pit que se encarga de automatizar todas estas pruebas. Además, se puede lanzar junto a sonar.
 
@@ -85,9 +85,17 @@ mvn clean verify jacoco:report org.pitest:pitest-maven:mutationCoverage -Pcovera
 
 En el apartado del reporte correspondiente a las mutaciones podemos ver como una mutación ha sobrevivido, lo que indica que hay una parte de los tests que no funciona como debería o que hay algunas condiciones sin cubrir. 
 
-Si vamos al fichero correspondiente podremos ver que condición es la que no está completamente cubierta por los tests.
+Si vamos al fichero correspondiente podremos ver qué condición es la que no está completamente cubierta por los tests.
 
 <img src="./images/analysis.png" />
+
+Desde el análisis general del sonar también podremos ver las mutaciones que no han muerto a modo de bugs, en reliability: 
+
+<img src="./images/reliability.png" />
+
+Accediendo a estos podremos ver información sobre: clases donde se ha dado la mutación viva, condición que se ha cambiado, línea...
+
+<img src= "./images/issue.png" />
 
 
 ##### Documentación
