@@ -29,4 +29,15 @@ class JavaMutationTestingWorkshopApplicationTests {
         assertEquals("Smaller than or equal to 50", result);
     }
 
+    /*
+    @Test
+    void equalsFifty() {
+
+        SumService sumService = new SumService();
+        var result = sumService.compareToFifty(50);
+
+        assertEquals("Smaller than or equal to 50", result);
+    }
+     */
+
 }
