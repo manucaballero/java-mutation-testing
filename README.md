@@ -8,17 +8,33 @@ Si tenemos una mutación y todos los tests siguen pasando (la mutación sigue vi
 
 En el entorno de Java tenemos un plugin llamado Pit que se encarga de automatizar todas estas pruebas. Además, se puede lanzar junto a sonar.
 
+### Despliegue sonarqube en local
+
+En el fichero **docker-compose.yml** hay un servicio de sonarqube configurado junto a una base de datos de postgres.
+Para crearlo y levantarlo solo tenemos que ejecutar el siguiente comando:
+
+Para docker: `docker-compose up -d`
+
+Para podman: `podman-compose up -d`
+
 ### Requerimientos para lanzar sonar con pit
 
 Existe un plugin para Sonar: https://github.com/devcon5io/mutation-analysis-plugin
 
 #### Instalamos el plugin
 
+Para instalar el plugin en SonarQube, tenemos que ir a Administration > Marketplace > Plugins.
+Buscamos Mutation Analysis y pulsamos en Install.
+
+Es probable que sonar nos pida que reiniciemos el servidor para activar el plugin.
+
 <img src="./images/plugin.png" />
 
 #### Activamos las reglas 
 
-Para activar las reglas incluidas con el plugin tenemos que ir a Quality Profiles y seleccionar el perfil al que queremos añadir las reglas. Una vez en el perfil pulsamos en Activate More. En el apartado repository del filtro seleccionamos MutationAnalysis y en el apartado status seleccionamos Ready. Esto nos mostrará las reglas del plugin que sean estables. Activamos todas y ya tenemos sonar preparado.
+Para activar las reglas incluidas con el plugin tenemos que ir a Quality Profiles y seleccionar el perfil al que queremos añadir las reglas. 
+Una vez en el perfil pulsamos en Activate More. En el apartado repository del filtro seleccionamos MutationAnalysis y en el apartado status seleccionamos Ready. 
+Esto nos mostrará las reglas del plugin que sean estables. Activamos todas y ya tenemos sonar preparado.
 
 <img src="./images/rules.png" />
 
@@ -80,6 +96,10 @@ mvn clean verify jacoco:report org.pitest:pitest-maven:mutationCoverage -Pcovera
    -Dsonar.exclusions="**/*.xml,**/*.yml,**/*.properties,**/*.json,**/*.config,**/*.md" \
    -Dsonar.java.coveragePlugin="jacoco" \
 ```
+#### Obtención de token en sonarqube
+
+Para poder lanzar el comando previo necesitamos tener un token de acceso en sonarqube.
+Para obtenerlo tenemos que ir a nuestro perfil de usuario > My Account > Security > Generate Token.
 
 #### Resultado del reporte
 
